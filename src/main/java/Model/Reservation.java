@@ -35,8 +35,9 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name="passager")
 	private Passager passager;
-	//@ManyToOne
-	//private Client client;
+	@ManyToOne
+	@JoinColumn(name="client")
+	private Client client;
 	@ManyToOne
 	@JoinColumn(name="vol_id")
 	private Vol vol;
@@ -87,6 +88,32 @@ public class Reservation {
 
 	public void setVol(Vol vol) {
 		this.vol = vol;
+	}
+	
+	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public Passager getPassager() {
+		return passager;
+	}
+
+	public void setPassager(Passager passager) {
+		this.passager = passager;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@Override
