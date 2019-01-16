@@ -1,13 +1,13 @@
 package Model;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 @Entity
 public class ClientMoral extends Client{
-	
+	@Embedded
 	@Column(name="title")
-	
 	private TitreMoral titre;
 	@Column(name="siret")
 	private String siret;

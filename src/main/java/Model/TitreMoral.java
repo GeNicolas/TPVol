@@ -1,9 +1,15 @@
 package Model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class TitreMoral {
 
 	 private String titre_moral;
 
+	 public TitreMoral () {
+		 
+	 }
 	public TitreMoral(String titre_moral) {
 		super();
 		this.titre_moral = titre_moral;
