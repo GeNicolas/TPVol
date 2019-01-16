@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-import classe.Filmographie;
+
 
 @Entity 
 @Table(name="vol") 
