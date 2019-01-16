@@ -28,9 +28,9 @@ public class Ville {
 	
 	@ManyToMany
 	@JoinTable(
-			name="aeroport",
-			joinColumns=@JoinColumn(name="aeroport_id", referencedColumnName="id"),
-			inverseJoinColumns=@JoinColumn(name="ville", referencedColumnName="id")
+			name="aeroport_villes",
+			joinColumns=@JoinColumn(name="villes", referencedColumnName="id"),
+			inverseJoinColumns=@JoinColumn(name="aeroports", referencedColumnName="id")
 			)
 	private List<Aeroport> aeroports;
 	
@@ -71,6 +71,7 @@ public class Ville {
 	public List<Aeroport> getAeroport() {
 		return aeroports;
 	}
+	
 
 	public void setAeroport(List<Aeroport> aeroport) {
 		this.aeroports = aeroport;
