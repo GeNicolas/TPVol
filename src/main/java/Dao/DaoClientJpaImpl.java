@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import Model.Client;
+import Model.Reservation;
 import Util.Context;
 
 
@@ -21,14 +22,6 @@ public class DaoClientJpaImpl implements DaoClient{
 		personnes=query.getResultList();
 		em.close();
 		return personnes;
-	}
-
-	public Client findByKey(Integer key) {
-		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
-		Client p = null;
-		p = em.find(Client.class, key);
-		em.close();
-		return p;
 	}
 
 	public void insert(Client obj) {
@@ -82,7 +75,35 @@ public class DaoClientJpaImpl implements DaoClient{
 		em.close();
 	}
 
-	public void deleteByKey(Integer key) {
+
+		
+	
+	public Client findByKeyWithReservation (Integer key) {
+		EntityManager em= Context.getEntityManagerFactory().createEntityManager();
+		Query query = em.createQuery("distinct c from Client c left join fetch c.reservation r where c.id=key?");
+	
+		query.setParameter("key", key);
+		List<Reservation> reservation = null;
+		
+		try{ 
+			reservation= (List<Reservation>) query.getResultList();
+		}catch (Exception e) {
+			
+		}
+		em.close();
+		return reservation;
+	}
+
+	public Client findByKey(Long key){
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
+		Client p = null;
+		p = em.find(Client.class, key);
+		em.close();
+		return p;
+	}
+
+
+	public void deleteByKey(Long key) {
 		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
@@ -98,21 +119,8 @@ public class DaoClientJpaImpl implements DaoClient{
 		em.close();
 	}
 	
-	public Rerservation findByKeyWithReservation (Integer key) {
-		EntityManager em= Context.getEntityManagerFactory().createEntityManager();
-		Query query = em.createQuery("select c from Client c left join fetch a.id_article art left join fetch art.id where a.id=key?");
-	
-		query.setParameter("key", key);
-		List<Rerservation> reservation = null;
-		
-		try{ 
-			reservation= (List<Reservation>) query.getResultList();
-		}catch (Exception e) {
-			
-		}
-		em.close();
-		return reservation;
-	}
+
+
 }
 
 

@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -11,6 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -40,7 +45,14 @@ public abstract class Client {
 			@AttributeOverride(name = "codePostal", column = @Column(name = "zip_code", length = 5)),
 			@AttributeOverride(name = "ville", column = @Column(name = "city", length = 150)) })
 		private Adresse adresse;
+		//@OneToMany(mappedBy="client")
+
+		//private Set <Reservation> reservation;
 		
+		
+		@OneToOne
+		@JoinColumn(name="login")
+		private Login login;
 		@Version
 		private int version;
 		
