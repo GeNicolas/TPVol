@@ -12,7 +12,7 @@ public class ClientMoral extends Client{
 	@Column(name="siret")
 	private String siret;
 	@Version
-	private Version version;
+	private int version;
 	
 	public ClientMoral () {
 		
@@ -37,12 +37,11 @@ public class ClientMoral extends Client{
 	public void setSiret(String siret) {
 		this.siret = siret;
 	}
-	public Version getVersion() {
+	public int getVersion() {
 		return version;
 	}
-	public void setVersion(Version version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 
-	
 }
