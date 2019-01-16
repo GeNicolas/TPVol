@@ -36,6 +36,12 @@ public class ClientPhysique extends Client {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	
 	
 }

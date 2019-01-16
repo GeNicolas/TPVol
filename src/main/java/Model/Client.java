@@ -45,9 +45,9 @@ public abstract class Client {
 			@AttributeOverride(name = "codePostal", column = @Column(name = "zip_code", length = 5)),
 			@AttributeOverride(name = "ville", column = @Column(name = "city", length = 150)) })
 		private Adresse adresse;
-		//@OneToMany(mappedBy="client")
+		@OneToMany(mappedBy="client")
 
-		//private Set <Reservation> reservation;
+		private Set <Reservation> reservation;
 		
 		
 		@OneToOne
@@ -118,6 +118,46 @@ public abstract class Client {
 
 		public void setEmail(String email) {
 			this.email = email;
+		}
+
+
+		public Adresse getAdresse() {
+			return adresse;
+		}
+
+
+		public void setAdresse(Adresse adresse) {
+			this.adresse = adresse;
+		}
+
+
+		public Set<Reservation> getReservation() {
+			return reservation;
+		}
+
+
+		public void setReservation(Set<Reservation> reservation) {
+			this.reservation = reservation;
+		}
+
+
+		public Login getLogin() {
+			return login;
+		}
+
+
+		public void setLogin(Login login) {
+			this.login = login;
+		}
+
+
+		public int getVersion() {
+			return version;
+		}
+
+
+		public void setVersion(int version) {
+			this.version = version;
 		}
 
 

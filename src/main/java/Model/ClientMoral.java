@@ -37,6 +37,12 @@ public class ClientMoral extends Client{
 	public void setSiret(String siret) {
 		this.siret = siret;
 	}
+	public Version getVersion() {
+		return version;
+	}
+	public void setVersion(Version version) {
+		this.version = version;
+	}
 
 	
 }

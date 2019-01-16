@@ -83,15 +83,15 @@ public class DaoClientJpaImpl implements DaoClient{
 		Query query = em.createQuery("distinct c from Client c left join fetch c.reservation r where c.id=key?");
 	
 		query.setParameter("key", key);
-		List<Reservation> reservation = null;
+		Client client = null;
 		
 		try{ 
-			reservation= (List<Reservation>) query.getResultList();
+			client= (List<Client>) query.getResultList();
 		}catch (Exception e) {
 			
 		}
 		em.close();
-		return reservation;
+		return client;
 	}
 
 	public Client findByKey(Long key){
