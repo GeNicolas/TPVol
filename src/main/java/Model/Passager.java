@@ -30,8 +30,8 @@ public class Passager {
 	@OneToMany(mappedBy="passager")
 	private List<Reservation> reservations;
 	
-	//@Embedded
-	//private Adresse adresse;
+	@Embedded
+	private Adresse adresse;
 	
 	// Constructeurs
 	
@@ -86,6 +86,27 @@ public class Passager {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 

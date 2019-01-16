@@ -2,9 +2,9 @@ package Dao;
 
 
 public class DaoCLientFactory {
-	private static DaoClient singleton = null;
+	private static DaoClientJpaImpl singleton = null;
 
-	public static DaoClient getInstance() {
+	public static DaoClientJpaImpl getInstance() {
 		if (singleton == null) {
 			singleton = new DaoClientJpaImpl();
 		}

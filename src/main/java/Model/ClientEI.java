@@ -1,12 +1,14 @@
 package Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 
 @Entity
 public class ClientEI extends Client{
-			
+		@Column(name="title")	
 		private TitrePhysique titre;
+		@Column(name="first_name")
 		private String prenom;
 		@Version
 		private int version;
