@@ -2,6 +2,7 @@ package Dao;
 
 import java.util.List;
 
+
 public interface DaoGeneric <T, K> {
 	public List<T> findAll();
 
@@ -14,4 +15,6 @@ public interface DaoGeneric <T, K> {
 	public void delete(T obj);
 
 	public void deleteByKey(K key);
+
+
 }
