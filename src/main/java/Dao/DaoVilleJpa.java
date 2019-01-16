@@ -13,7 +13,7 @@ import Util.Context;
 public class DaoVilleJpa implements DaoVille{
 
 	public List<Ville> findAll() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("from Ville v");
 		List<Ville> ville = null;
 		ville = query.getResultList();
@@ -22,7 +22,7 @@ public class DaoVilleJpa implements DaoVille{
 	}
 
 	public Ville findByKey(Long key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Ville r = null;
 		r = em.find(Ville.class, key);
 		em.close();
@@ -30,7 +30,7 @@ public class DaoVilleJpa implements DaoVille{
 	}
 
 	public void insert(Ville obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -69,7 +69,7 @@ public class DaoVilleJpa implements DaoVille{
 	}
 
 	public void delete(Ville obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -94,7 +94,7 @@ public class DaoVilleJpa implements DaoVille{
 	}
 
 	public void deleteByKey(Long key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();

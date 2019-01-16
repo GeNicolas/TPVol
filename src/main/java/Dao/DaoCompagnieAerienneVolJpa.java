@@ -15,7 +15,7 @@ import Util.Context;
 public class DaoCompagnieAerienneVolJpa implements DaoCompagnieAerienneVol{
 
 	public void insert(CompagnieAerienneVol obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -35,7 +35,7 @@ public class DaoCompagnieAerienneVolJpa implements DaoCompagnieAerienneVol{
 	}
 
 	public CompagnieAerienneVol findByKey(CompagnieAerienneKey key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		CompagnieAerienneVol r = null;
 		r = em.find(CompagnieAerienneVol.class, key);
 		em.close();
@@ -61,7 +61,7 @@ public class DaoCompagnieAerienneVolJpa implements DaoCompagnieAerienneVol{
 	}
 
 	public void delete(CompagnieAerienneVol obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -83,7 +83,7 @@ public class DaoCompagnieAerienneVolJpa implements DaoCompagnieAerienneVol{
 	}
 
 	public void deleteByKey(CompagnieAerienneKey key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -103,7 +103,7 @@ public class DaoCompagnieAerienneVolJpa implements DaoCompagnieAerienneVol{
 	}
 
 	public List<CompagnieAerienneVol> findAll() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("from CompagnieAerienneVol cav");
 		List<CompagnieAerienneVol> cav = null;
 		cav = query.getResultList();

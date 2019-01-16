@@ -13,7 +13,7 @@ import Util.Context;
 public class DaoAeroportJpa implements DaoAeroport{
 
 	public void insert(Aeroport obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -33,7 +33,7 @@ public class DaoAeroportJpa implements DaoAeroport{
 	}
 
 	public Aeroport findByKey(Long key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Aeroport r = null;
 		r = em.find(Aeroport.class, key);
 		em.close();
@@ -59,7 +59,7 @@ public class DaoAeroportJpa implements DaoAeroport{
 	}
 
 	public void delete(Aeroport obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -80,7 +80,7 @@ public class DaoAeroportJpa implements DaoAeroport{
 	}
 
 	public void deleteByKey(Long key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -100,7 +100,7 @@ public class DaoAeroportJpa implements DaoAeroport{
 	}
 
 	public List<Aeroport> findAll() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("from Aeroport a");
 		List<Aeroport> aeroports = null;
 		aeroports = query.getResultList();
@@ -109,7 +109,7 @@ public class DaoAeroportJpa implements DaoAeroport{
 	}
 
 	public List<Aeroport> findAllWithVol() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createNamedQuery("Aeroport.findAllWithVol");
 		List<Aeroport> aeroport = query.getResultList();
 		em.close();
@@ -117,7 +117,7 @@ public class DaoAeroportJpa implements DaoAeroport{
 	}
 	
 	public List<Aeroport> findAllWithVille() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createNamedQuery("Aeroport.findAllWithVille");
 		List<Aeroport> aeroport = query.getResultList();
 		em.close();

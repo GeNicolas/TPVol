@@ -15,7 +15,7 @@ import Util.Context;
 public class DaoCompagnieAerienneJpa implements DaoCompagnieAerienne {
 
 	public void insert(CompagnieAerienne obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -35,7 +35,7 @@ public class DaoCompagnieAerienneJpa implements DaoCompagnieAerienne {
 	}
 
 	public CompagnieAerienne findByKey(Long key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		CompagnieAerienne r = null;
 		r = em.find(CompagnieAerienne.class, key);
 		em.close();
@@ -61,15 +61,12 @@ public class DaoCompagnieAerienneJpa implements DaoCompagnieAerienne {
 	}
 
 	public void delete(CompagnieAerienne obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
 			tx.begin();
 			obj = em.merge(obj);
-			for (Vol v : obj.getVols()) {
-				em.remove(v);
-			}
 			em.remove(obj);
 			tx.commit();
 		} catch (Exception e) {
@@ -85,7 +82,7 @@ public class DaoCompagnieAerienneJpa implements DaoCompagnieAerienne {
 	}
 
 	public void deleteByKey(Long key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -105,7 +102,7 @@ public class DaoCompagnieAerienneJpa implements DaoCompagnieAerienne {
 	}
 
 	public List<CompagnieAerienne> findAll() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("from CompagnieAerienne ca");
 		List<CompagnieAerienne> compagnieAerienne = null;
 		compagnieAerienne = query.getResultList();

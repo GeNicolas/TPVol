@@ -14,7 +14,7 @@ import Util.Context;
 public class DaoEscaleJpa implements DaoEscale {
 
 	public void insert(Escale obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -34,7 +34,7 @@ public class DaoEscaleJpa implements DaoEscale {
 	}
 
 	public Escale findByKey(EscaleKey key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Escale r = null;
 		r = em.find(Escale.class, key);
 		em.close();
@@ -60,7 +60,7 @@ public class DaoEscaleJpa implements DaoEscale {
 	}
 
 	public void delete(Escale obj) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -82,7 +82,7 @@ public class DaoEscaleJpa implements DaoEscale {
 	}
 
 	public void deleteByKey(EscaleKey key) {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = em.getTransaction();
@@ -103,7 +103,7 @@ public class DaoEscaleJpa implements DaoEscale {
 	}
 
 	public List<Escale> findAll() {
-		EntityManager em = Context.getInstance().getEntityManagerFactory().createEntityManager();
+		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("from Escale es");
 		List<Escale> es = null;
 		es = query.getResultList();
