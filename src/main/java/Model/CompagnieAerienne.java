@@ -15,7 +15,7 @@ import javax.persistence.Version;
 
 @Entity 
 @Table(name="compagnie") 
-@SequenceGenerator(name="seqCompagnie", sequenceName="seq_compagnie", allocationSize=1, initialValue=1000) 
+@SequenceGenerator(name="seqCompagnie", sequenceName="seq_compagnie", allocationSize=1, initialValue=100) 
 
 public class CompagnieAerienne {
 
@@ -29,14 +29,16 @@ public class CompagnieAerienne {
 	@OneToMany (mappedBy="id.compagnie")
 	private List<CompagnieAerienne> compagnieAerienne;
 	
+	@OneToMany (mappedBy="id.vol")
+	private List<Vol> vols;
+	
 	@Version
 	private int version;
 	
 	// *** Constructeurs ***
 
-	public CompagnieAerienne(Long id, String nom) {
+	public CompagnieAerienne(String nom) {
 		super();
-		this.id = id;
 		this.nom = nom;
 	}
 
@@ -60,6 +62,30 @@ public class CompagnieAerienne {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public List<CompagnieAerienne> getCompagnieAerienne() {
+		return compagnieAerienne;
+	}
+
+	public void setCompagnieAerienne(List<CompagnieAerienne> compagnieAerienne) {
+		this.compagnieAerienne = compagnieAerienne;
+	}
+
+	public List<Vol> getVols() {
+		return vols;
+	}
+
+	public void setVols(List<Vol> vols) {
+		this.vols = vols;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 	
 	

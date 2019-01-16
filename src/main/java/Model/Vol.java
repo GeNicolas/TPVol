@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,6 +27,11 @@ import javax.persistence.Version;
 @Entity 
 @Table(name="vol") 
 @SequenceGenerator(name="seqVol", sequenceName="seq_vol", allocationSize=1, initialValue=1000) 
+
+@NamedQueries({
+	@NamedQuery(name = "Vol.findAllWithReservation", query = "select distinct v from Vol v left join fetch v.reservation"),
+	@NamedQuery(name = "Vol.findAllWithAeroport", query = "select distinct v from Vol v left join fetch v.aeroport"),
+	@NamedQuery(name = "Vol.findAllWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne") })
 
 public class Vol {
 
@@ -47,22 +55,23 @@ public class Vol {
 	@Column(name="heure_arrive")
 	private Date heureArrivee;
 	
-	@OneToOne
-	@Column(name="reservation_id")
+	@OneToOne(mappedBy="id.reservation")
 	private Reservation reservation;
 	
-	@Column(name="aeroport_id")
+	@ManyToOne
+	@JoinColumn(name="aeroport.id")
 	private Aeroport aeroport;
 	
-
+	@ManyToOne
+	@JoinColumn(name="compagnie.id")
+	private CompagnieAerienne compagnieAerienne;
+	
 	@Version
 	private int version;
 	
 	@OneToMany(mappedBy="id.vol")
 	private List<Vol> vol;
 	
-	@ManyToMany(mappedBy="id.vol_aeroport")
-	private List<Vol> vols;
 	
 	// *** Constructeurs ***
 	
@@ -114,6 +123,14 @@ public class Vol {
 
 	public void setDateArrivee(Date dateArrivee) {
 		this.dateArrivee = dateArrivee;
+	}
+
+	public Date getHeureDepart() {
+		return heureDepart;
+	}
+
+	public void setHeureDepart(Date heureDepart) {
+		this.heureDepart = heureDepart;
 	}
 
 	public Date getHeureArrivee() {

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,8 +36,8 @@ public class Aeroport {
 	@OneToMany (mappedBy="id.vol")
 	private List<Vol> vols;
 	
-	@ManyToMany
-	private List<Ville> ville;
+	@ManyToOne
+	private Ville ville;
 	
 	@ManyToMany(mappedBy="id.aeroport")
 	private List<Aeroport> aeroports;
@@ -47,7 +48,7 @@ public class Aeroport {
 		super();
 	}
 
-	public Aeroport(String nom, List<Ville> ville) {
+	public Aeroport(String nom, Ville ville) {
 		super();
 		this.nom = nom;
 		this.ville = ville;
@@ -63,12 +64,36 @@ public class Aeroport {
 		this.nom = nom;
 	}
 
-	public List<Ville> getVille() {
+	public Ville getVille() {
 		return ville;
 	}
 
-	public void setVille(List<Ville> ville) {
+	public void setVille(Ville ville) {
 		this.ville = ville;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Vol> getVols() {
+		return vols;
+	}
+
+	public void setVols(List<Vol> vols) {
+		this.vols = vols;
+	}
+
+	public List<Aeroport> getAeroports() {
+		return aeroports;
+	}
+
+	public void setAeroports(List<Aeroport> aeroports) {
+		this.aeroports = aeroports;
 	}
 
 	@Override
