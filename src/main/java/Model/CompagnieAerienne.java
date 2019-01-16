@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import classe.Filmographie;
+
 @Entity 
 @Table(name="compagnie") 
 @SequenceGenerator(name="seqCompagnie", sequenceName="seq_compagnie", allocationSize=1, initialValue=1000) 
