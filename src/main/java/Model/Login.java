@@ -28,9 +28,8 @@ public class Login {
 	@Version
 	private int version;
 	
-	//@OneToOne
-	//@JoinColumn(name="client")
-	//private Client client;
+	@OneToOne(mappedBy = "login")
+	private Client client;
 	
 	//Constructeurs
 	
@@ -98,6 +97,17 @@ public class Login {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	
+
+	public Client getClient() {
+		return client;
+	}
+
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 
