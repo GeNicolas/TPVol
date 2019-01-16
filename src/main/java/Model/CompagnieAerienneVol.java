@@ -13,6 +13,8 @@ public class CompagnieAerienneVol {
 	@Column(name="numero")
 	private String numero;
 	
+
+	
 	// *** Constructeurs ***
 	
 	public CompagnieAerienneVol() {

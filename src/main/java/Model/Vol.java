@@ -55,22 +55,22 @@ public class Vol {
 	@Column(name="heure_arrive")
 	private Date heureArrivee;
 	
-	@OneToOne(mappedBy="id.reservation")
-	private Reservation reservation;
+	@OneToMany(mappedBy="vol")
+	private Set<Reservation> reservation;
 	
 	@ManyToOne
 	@JoinColumn(name="aeroport.id")
 	private Aeroport aeroport;
 	
-	@ManyToOne
-	@JoinColumn(name="compagnie.id")
-	private CompagnieAerienne compagnieAerienne;
+	@OneToMany(mappedBy="key.vol")
+	private Set<CompagnieAerienneVol> compagnieAerienne;
+	
+	@OneToMany(mappedBy="key.vol")
+	private Set<Escale> escale;
 	
 	@Version
 	private int version;
-	
-	@OneToMany(mappedBy="id.vol")
-	private List<Vol> vol;
+
 	
 	
 	// *** Constructeurs ***
@@ -87,7 +87,7 @@ public class Vol {
 		this.heureArrivee = heureArrivee;
 	}
 
-	public Vol(Date dateDepart, Date dateArrivee, Date heureDepart, Date heureArrivee, Reservation reservation,
+	public Vol(Date dateDepart, Date dateArrivee, Date heureDepart, Date heureArrivee, Set<Reservation> reservation,
 			Aeroport aeroport) {
 		super();
 		this.dateDepart = dateDepart;
@@ -141,11 +141,11 @@ public class Vol {
 		this.heureArrivee = heureArrivee;
 	}
 
-	public Reservation getReservation() {
+	public Set<Reservation> getReservation() {
 		return reservation;
 	}
 
-	public void setReservation(Reservation reservation) {
+	public void setReservation( Set<Reservation> reservation) {
 		this.reservation = reservation;
 	}
 
@@ -165,12 +165,6 @@ public class Vol {
 		this.version = version;
 	}
 
-	public List<Vol> getVol() {
-		return vol;
-	}
 
-	public void setVol(List<Vol> vol) {
-		this.vol = vol;
-	}
 
 }

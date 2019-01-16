@@ -11,9 +11,9 @@ import javax.persistence.OneToMany;
 @Embeddable
 public class CompagnieAerienneKey implements Serializable {
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="vol_id")
-	List<Vol> vol;
+	Vol vol;
 	
 	@ManyToOne
 	@JoinColumn(name="compagnie_id")
@@ -23,17 +23,17 @@ public class CompagnieAerienneKey implements Serializable {
 		super();
 	}
 	
-	public CompagnieAerienneKey(CompagnieAerienne compagnieAerienne,List<Vol> vol) {
+	public CompagnieAerienneKey(CompagnieAerienne compagnieAerienne,Vol vol) {
 		super();
 		this.compagnieAerienne=compagnieAerienne;
 		this.vol=vol;
 	}
 
-	public List<Vol> getVol() {
+	public Vol getVol() {
 		return vol;
 	}
 
-	public void setVol(List<Vol> vol) {
+	public void setVol(Vol vol) {
 		this.vol = vol;
 	}
 

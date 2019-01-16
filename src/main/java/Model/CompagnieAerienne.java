@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,11 +27,8 @@ public class CompagnieAerienne {
 	@Column(name="nom")
 	private String nom;
 	
-	@OneToMany (mappedBy="id.compagnie")
-	private List<CompagnieAerienne> compagnieAerienne;
-	
-	@OneToMany (mappedBy="id.vol")
-	private List<Vol> vols;
+	@OneToMany(mappedBy="key.compagnieAerienne")
+	private Set<CompagnieAerienneVol> cav;
 	
 	@Version
 	private int version;
@@ -64,20 +62,12 @@ public class CompagnieAerienne {
 		this.nom = nom;
 	}
 
-	public List<CompagnieAerienne> getCompagnieAerienne() {
-		return compagnieAerienne;
+	public Set<CompagnieAerienneVol> getCav() {
+		return cav;
 	}
 
-	public void setCompagnieAerienne(List<CompagnieAerienne> compagnieAerienne) {
-		this.compagnieAerienne = compagnieAerienne;
-	}
-
-	public List<Vol> getVols() {
-		return vols;
-	}
-
-	public void setVols(List<Vol> vols) {
-		this.vols = vols;
+	public void setCav(Set<CompagnieAerienneVol> cav) {
+		this.cav = cav;
 	}
 
 	public int getVersion() {

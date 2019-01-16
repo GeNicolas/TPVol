@@ -1,6 +1,7 @@
 package Model;
 
-import java.util.List;
+import java.util.Set;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	@NamedQuery(name = "Aeroport.findAllWithVol", query = "select distinct a from Aeroport a left join fetch a.vols"),
-	@NamedQuery(name = "Aeroport.findAllWithVille", query = "select distinct a from Aeroport a left join fetch a.ville") })
+	@NamedQuery(name = "Aeroport.findAllWithVille", query = "select distinct a from Aeroport a left join fetch a.villes") })
 
 
 public class Aeroport {
@@ -33,14 +34,16 @@ public class Aeroport {
 	@Column(name="nom")
 	private String nom;
 	
-	@OneToMany (mappedBy="id.vol")
-	private List<Vol> vols;
+	@OneToMany (mappedBy="aeroport")
+	private Set<Vol> vols;
 	
-	@ManyToOne
-	private Ville ville;
+	@ManyToMany(mappedBy ="aeroports")
+	private Set<Ville> villes;
 	
-	@ManyToMany(mappedBy="id.aeroport")
-	private List<Aeroport> aeroports;
+	@OneToMany(mappedBy="key.aeroport")
+	private Set<Escale> escale;
+	
+	
 	
 	// *** Constructeur ***
 	
@@ -48,10 +51,10 @@ public class Aeroport {
 		super();
 	}
 
-	public Aeroport(String nom, Ville ville) {
+	public Aeroport(String nom, Set<Ville> ville) {
 		super();
 		this.nom = nom;
-		this.ville = ville;
+		this.villes = ville;
 	}
 	
 	// *** Methodes ***
@@ -64,12 +67,12 @@ public class Aeroport {
 		this.nom = nom;
 	}
 
-	public Ville getVille() {
-		return ville;
+	public Set<Ville> getVille() {
+		return villes;
 	}
 
-	public void setVille(Ville ville) {
-		this.ville = ville;
+	public void setVille(Set<Ville> ville) {
+		this.villes = ville;
 	}
 
 	public Long getId() {
@@ -80,21 +83,15 @@ public class Aeroport {
 		this.id = id;
 	}
 
-	public List<Vol> getVols() {
+	public Set<Vol> getVols() {
 		return vols;
 	}
 
-	public void setVols(List<Vol> vols) {
+	public void setVols(Set<Vol> vols) {
 		this.vols = vols;
 	}
 
-	public List<Aeroport> getAeroports() {
-		return aeroports;
-	}
 
-	public void setAeroports(List<Aeroport> aeroports) {
-		this.aeroports = aeroports;
-	}
 
 	@Override
 	public int hashCode() {

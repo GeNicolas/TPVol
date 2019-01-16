@@ -6,41 +6,42 @@ import java.util.List;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class EscaleKey  implements Serializable{
 
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="vol_id")
-	List<Vol> vol;
+	private Vol vol;
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="aeroport_id")
-	List<Aeroport> aeroport;
+	private Aeroport aeroport;
 	
 	public EscaleKey() {
 		super();
 	}
 
-	public EscaleKey(List<Vol> vol, List<Aeroport> aeroport) {
+	public EscaleKey(Vol vol, Aeroport aeroport) {
 		super();
 		this.vol = vol;
 		this.aeroport = aeroport;
 	}
 
-	public List<Vol> getVol() {
+	public Vol getVol() {
 		return vol;
 	}
 
-	public void setVol(List<Vol> vol) {
+	public void setVol(Vol vol) {
 		this.vol = vol;
 	}
 
-	public List<Aeroport> getAeroport() {
+	public Aeroport getAeroport() {
 		return aeroport;
 	}
 
-	public void setAeroport(List<Aeroport> aeroport) {
+	public void setAeroport(Aeroport aeroport) {
 		this.aeroport = aeroport;
 	}
 

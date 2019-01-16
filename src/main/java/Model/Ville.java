@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,7 +27,12 @@ public class Ville {
 	private String nom;
 	
 	@ManyToMany
-	private List<Aeroport> aeroport;
+	@JoinTable(
+			name="aeroport",
+			joinColumns=@JoinColumn(name="aeroport_id", referencedColumnName="id"),
+			inverseJoinColumns=@JoinColumn(name="ville", referencedColumnName="id")
+			)
+	private List<Aeroport> aeroports;
 	
 	// *** Constructeur ***
 	public Ville() {
@@ -40,7 +47,7 @@ public class Ville {
 	public Ville(String nom, List<Aeroport> aeroport) {
 		super();
 		this.nom = nom;
-		this.aeroport = aeroport;
+		this.aeroports = aeroport;
 	}
 	
 	// *** Methodes ***
@@ -62,11 +69,11 @@ public class Ville {
 	}
 
 	public List<Aeroport> getAeroport() {
-		return aeroport;
+		return aeroports;
 	}
 
 	public void setAeroport(List<Aeroport> aeroport) {
-		this.aeroport = aeroport;
+		this.aeroports = aeroport;
 	}
 
 	@Override
