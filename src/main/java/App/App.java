@@ -1,40 +1,47 @@
 package App;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import Dao.DaoCLientFactory;
 import Dao.DaoClientJpaImpl;
-import Dao.DaoPassager;
-import Dao.DaoPassagerFactory;
 import Dao.DaoReservation;
 import Dao.DaoReservationFactory;
 import Dao.DaoReservationImpl;
 import Model.Client;
 import Model.ClientEI;
-import Model.Passager;
 import Model.Reservation;
-import Util.Context;
 
 public class App {
 
 	public static void main(String[] args) {
 		
-		/*
-		Client client = new ClientEI();
 		
-		DaoClientJpaImpl clients = DaoCLientFactory.getInstance();
-		clients.insert(client);
-		System.out.println("blbé");*/
+//		Client client = new ClientEI();
+//		
+//		DaoClientJpaImpl clients = DaoCLientFactory.getInstance();
+//		clients.insert(client);
+		System.out.println("...................................");
 		
-		Passager p = new Passager("pierre", "paulJacque");
+		DaoVille daoVille = DaoVilleFactory.getInstance();
+		DaoAeroport daoAeroport = DaoAeroportFactory.getInstance();
 		
-		DaoPassager pfactory = DaoPassagerFactory.getPassagerFactory();
+		Set villes = new HashSet();
+		Ville paris = new Ville("Paris");
+		Ville beauvais = new Ville ("Beauvais");
+		villes.add(paris);
+		villes.add(beauvais);
 		
-		pfactory.insert(p);
+		Aeroport a = new Aeroport("ORLY");
 		
-		Context.getEntityManagerFactory();
+		
+		
+		daoVille.insert(paris);
+		daoVille.insert(beauvais);
+		daoAeroport.insert(a);
+		
+		
+		
 		
 	}
 

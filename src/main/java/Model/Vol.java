@@ -30,7 +30,7 @@ import javax.persistence.Version;
 
 @NamedQueries({
 	@NamedQuery(name = "Vol.findAllWithReservation", query = "select distinct v from Vol v left join fetch v.reservation"),
-	@NamedQuery(name = "Vol.findAllWithAeroport", query = "select distinct v from Vol v left join fetch v.aeroport"),
+	@NamedQuery(name = "Vol.findAllWithAeroport", query = "select distinct v from Vol v left join fetch v.aeroport_depart"),
 	@NamedQuery(name = "Vol.findAllWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne") })
 
 public class Vol {
@@ -59,8 +59,12 @@ public class Vol {
 	private Set<Reservation> reservation;
 	
 	@ManyToOne
-	@JoinColumn(name="aeroport.id")
-	private Aeroport aeroport;
+	@JoinColumn(name="aeroport_arrive_id")
+	private Aeroport aeroport_arrive;
+	
+	@ManyToOne
+	@JoinColumn(name="aeroport_depart_id")
+	private Aeroport aeroport_depart;
 	
 	@OneToMany(mappedBy="key.vol")
 	private Set<CompagnieAerienneVol> compagnieAerienne;
@@ -88,14 +92,15 @@ public class Vol {
 	}
 
 	public Vol(Date dateDepart, Date dateArrivee, Date heureDepart, Date heureArrivee, Set<Reservation> reservation,
-			Aeroport aeroport) {
+			Aeroport aeroport_arrive, Aeroport aeroport_depart) {
 		super();
 		this.dateDepart = dateDepart;
 		this.dateArrivee = dateArrivee;
 		this.heureDepart = heureDepart;
 		this.heureArrivee = heureArrivee;
 		this.reservation = reservation;
-		this.aeroport = aeroport;
+		this.aeroport_arrive = aeroport_arrive;
+		this.aeroport_depart = aeroport_depart;
 	}
 
 	
@@ -149,13 +154,7 @@ public class Vol {
 		this.reservation = reservation;
 	}
 
-	public Aeroport getAeroport() {
-		return aeroport;
-	}
-
-	public void setAeroport(Aeroport aeroport) {
-		this.aeroport = aeroport;
-	}
+	
 
 	public int getVersion() {
 		return version;
@@ -165,6 +164,38 @@ public class Vol {
 		this.version = version;
 	}
 
+	public Aeroport getAeroport_arrive() {
+		return aeroport_arrive;
+	}
 
+	public void setAeroport_arrive(Aeroport aeroport_arrive) {
+		this.aeroport_arrive = aeroport_arrive;
+	}
+
+	public Aeroport getAeroport_depart() {
+		return aeroport_depart;
+	}
+
+	public void setAeroport_depart(Aeroport aeroport_depart) {
+		this.aeroport_depart = aeroport_depart;
+	}
+
+	public Set<CompagnieAerienneVol> getCompagnieAerienne() {
+		return compagnieAerienne;
+	}
+
+	public void setCompagnieAerienne(Set<CompagnieAerienneVol> compagnieAerienne) {
+		this.compagnieAerienne = compagnieAerienne;
+	}
+
+	public Set<Escale> getEscale() {
+		return escale;
+	}
+
+	public void setEscale(Set<Escale> escale) {
+		this.escale = escale;
+	}
+
+	
 
 }

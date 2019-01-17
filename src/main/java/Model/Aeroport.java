@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -21,7 +23,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name="seqAeroport",sequenceName="seq_aeroport", allocationSize=1, initialValue=10) 
 
 @NamedQueries({
-	@NamedQuery(name = "Aeroport.findAllWithVol", query = "select distinct a from Aeroport a left join fetch a.vols"),
+	@NamedQuery(name = "Aeroport.findAllWithVol", query = "select distinct a from Aeroport a left join fetch a.vol_arrivee"),
 	@NamedQuery(name = "Aeroport.findAllWithVille", query = "select distinct a from Aeroport a left join fetch a.villes") })
 
 
@@ -34,14 +36,18 @@ public class Aeroport {
 	@Column(name="nom")
 	private String nom;
 	
-	@OneToMany (mappedBy="aeroport")
-	private Set<Vol> vols;
+	@OneToMany (mappedBy="aeroport_arrive")
+	private Set<Vol> vol_arrivee;
+	
+	@OneToMany (mappedBy="aeroport_depart")
+	private Set<Vol> vol_depart;
 	
 	@ManyToMany(mappedBy ="aeroports")
 	private Set<Ville> villes;
 	
 	@OneToMany(mappedBy="key.aeroport")
 	private Set<Escale> escale;
+	
 	
 	
 	
@@ -83,15 +89,40 @@ public class Aeroport {
 		this.id = id;
 	}
 
-	public Set<Vol> getVols() {
-		return vols;
+
+
+
+	public Set<Vol> getVol_arrivee() {
+		return vol_arrivee;
 	}
 
-	public void setVols(Set<Vol> vols) {
-		this.vols = vols;
+	public void setVol_arrivee(Set<Vol> vol_arrivee) {
+		this.vol_arrivee = vol_arrivee;
 	}
 
+	public Set<Vol> getVol_depart() {
+		return vol_depart;
+	}
 
+	public void setVol_depart(Set<Vol> vol_depart) {
+		this.vol_depart = vol_depart;
+	}
+
+	public Set<Ville> getVilles() {
+		return villes;
+	}
+
+	public void setVilles(Set<Ville> villes) {
+		this.villes = villes;
+	}
+
+	public Set<Escale> getEscale() {
+		return escale;
+	}
+
+	public void setEscale(Set<Escale> escale) {
+		this.escale = escale;
+	}
 
 	@Override
 	public int hashCode() {
