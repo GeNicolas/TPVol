@@ -1,10 +1,13 @@
 package Model;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 @Entity
+@DiscriminatorValue(value="CM")
 public class ClientMoral extends Client{
 	@Embedded
 	@Column(name="title")
@@ -15,12 +18,15 @@ public class ClientMoral extends Client{
 	private int version;
 	
 	public ClientMoral () {
+		super();
 		
 	}
 	public ClientMoral(Long id, String nom, Integer numerotel, Integer numerofax, String email, TitreMoral titre, String siret) {
 		super(id, nom, numerotel, numerofax, email);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	public TitreMoral getTitre() {
 		return titre;
