@@ -3,7 +3,7 @@ package Dao;
 public class DaoPassagerFactory {
 private static DaoPassagerImpl singleton;
 	
-	public static DaoPassagerImpl getReservationFactory() {
+	public static DaoPassagerImpl getPassagerFactory() {
 		if (singleton == null)
 			singleton = new DaoPassagerImpl();
 		

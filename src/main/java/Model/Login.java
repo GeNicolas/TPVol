@@ -110,6 +110,8 @@ public class Login {
 		this.client = client;
 	}
 
+	
+	
 
 	@Override
 	public int hashCode() {

@@ -25,6 +25,14 @@ import Model.Reservation;
 import Model.TitreMoral;
 import Model.TitrePhysique;
 import Model.Ville;
+import Dao.DaoCLientFactory;
+import Dao.DaoClientJpaImpl;
+import Dao.DaoReservation;
+import Dao.DaoReservationFactory;
+import Dao.DaoReservationImpl;
+import Model.Client;
+import Model.ClientEI;
+import Model.Reservation;
 
 public class App {
 
