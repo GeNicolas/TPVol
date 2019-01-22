@@ -60,9 +60,8 @@ public abstract class Client {
 		}
 
 
-		public Client(Long id, String nom, Integer numerotel, Integer numerofax, String email) {
+		public Client( String nom, Integer numerotel, Integer numerofax, String email) {
 			super();
-			this.id = id;
 			this.nom = nom;
 			this.numerotel = numerotel;
 			this.numerofax = numerofax;

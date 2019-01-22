@@ -11,7 +11,7 @@ import javax.persistence.Version;
 @DiscriminatorValue(value="CP")
 public class ClientPhysique extends Client {
 	@Enumerated(EnumType.STRING)
-	@Column(name="title")
+	@Column(name="title",length=5)
 	private TitrePhysique titre;
 	@Column(name="last_name")
 	private String prenom;
@@ -22,7 +22,7 @@ public class ClientPhysique extends Client {
 		super();
 	}
 	public ClientPhysique(Long id, String nom, Integer numerotel, Integer numerofax, String email,TitrePhysique titre, String prenom) {
-		super(id, nom, numerotel, numerofax, email);
+		super( nom, numerotel, numerofax, email);
 		// TODO Auto-generated constructor stub
 	}
 
