@@ -69,14 +69,6 @@ public abstract class Client {
 		}
 
 
-		public Client(String nom, Integer numerotel, Integer numerofax, String email) {
-			super();
-			this.nom = nom;
-			this.numerotel = numerotel;
-			this.numerofax = numerofax;
-			this.email = email;
-		}
-
 
 		public Long getId() {
 			return id;

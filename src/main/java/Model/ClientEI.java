@@ -37,9 +37,10 @@ public class ClientEI extends Client{
 
 
 
-		public ClientEI(Long id, String nom, Integer numerotel, Integer numerofax, String email,TitrePhysique titre, String prenom) {
-			super(id, nom, numerotel, numerofax, email);
-			// TODO Auto-generated constructor stub
+		public ClientEI( String nom, Integer numerotel, Integer numerofax, String email,TitrePhysique titre, String prenom) {
+			super( nom, numerotel, numerofax, email);
+			this.titre=titre;
+			this.prenom=prenom;
 
 
 		}
