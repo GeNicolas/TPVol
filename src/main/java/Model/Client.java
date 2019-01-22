@@ -24,7 +24,7 @@ import javax.persistence.Version;
 @Table(name="Client")
 @SequenceGenerator(name="seqClient", sequenceName="seq_client", allocationSize=1, initialValue=100)
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",length=1)
+@DiscriminatorColumn(name="type",length=100)
 
 public abstract class Client {
 		@Id
@@ -61,9 +61,8 @@ public abstract class Client {
 		 }
 
 
-		public Client(Long id, String nom, Integer numerotel, Integer numerofax, String email) {
+		public Client( String nom, Integer numerotel, Integer numerofax, String email) {
 			super();
-			this.id = id;
 			this.nom = nom;
 			this.numerotel = numerotel;
 			this.numerofax = numerofax;

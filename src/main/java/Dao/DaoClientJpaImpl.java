@@ -78,7 +78,7 @@ public class DaoClientJpaImpl implements DaoClient{
 
 		
 	
-	public Client findByKeyWithReservation (Integer key) {
+	public Client findByKeyWithReservation (Long key) {
 		EntityManager em= Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("distinct c from Client c left join fetch c.reservation r where c.id=?1");
 	

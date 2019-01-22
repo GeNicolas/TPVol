@@ -17,8 +17,8 @@ public class ClientMoral extends Client{
 	public ClientMoral () {
 		
 	}
-	public ClientMoral(Long id, String nom, Integer numerotel, Integer numerofax, String email, TitreMoral titre, String siret) {
-		super(id, nom, numerotel, numerofax, email);
+	public ClientMoral( String nom, Integer numerotel, Integer numerofax, String email, TitreMoral titre, String siret) {
+		super( nom, numerotel, numerofax, email);
 		// TODO Auto-generated constructor stub
 	}
 
