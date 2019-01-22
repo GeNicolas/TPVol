@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+		
+		<!-- ************** Instanciation d'objets et d'attributs dans les class java ************* -->	
+		<!-- ************************************************************************************** -->
+		
+		<!-- Toutes les données sensibles, écrites sous forme "${nom.parametre}, sont stockés ds un fichier de configuration appellé "config.properties -->
+		<!-- Ce fichier de config est localisé dans le dossier main/ressources -->
+	<context:property-placeholder location="classpath:config.properties"/>	
+		
+		<!-- ******* Activation des annotations liées à Spring ******** -->
+	<context:annotation-config></context:annotation-config>
+		<!-- base-package = ts les packages auxquels pourrons être utilisé des annotations (si +ieurs, separation par des virgules) -->
+	<context:component-scan base-package="Dao,Model, Service"></context:component-scan>
+		
+	
+		
+		<!-- ******* Instanciation d'objets et d'attributs dans le fichier de configuration ******* -->	
+		<!-- ************************************************************************************** -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${db.driver}"></property>
+		<property name="url" value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
+		<property name="initialSize" value="${pool.initialSize}"></property> <!-- pool de connexion initial -->
+		<property name="maxTotal" value="${pool.maxTotal}"></property> <!-- pool de connexion maximal -->
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="packagesToScan" value="Model" ></property> <!-- dire à Spring où se trouve les entités qi devront etre rataché à l'entity manager -->
+		<property name="jpaVendorAdapter"> <!-- quel implementation de JPA veut-on utiliser? -->
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL95Dialect"></property>
+				<property name="showSql" value="true"></property> <!-- Peut être "false" si on ne veut pas voir s'afficher les requetes SQL -->
+			</bean>
+		</property>
+		
+		<property name="jpaProperties">
+			<props> <!-- Creation d'une Map avec des properties -->
+				<prop key="hibernate.hbm2ddl.auto">${db.auto}</prop> <!-- autres valeurs possibles: validate, create ou create-drop -->
+				<prop key="hibernate.format_sql">${db.formatsql}</prop> <!-- peut être passé à"false" si on ne veut pas du format SQL -->
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"></bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+	
+	<!-- base-package= ensemble des packages (séparés par des ,) dans lesquels on retrouve des repositories (ie des DAO géré par Spring) -->
+	<!-- base-package ressence tous les packages qui hérite du JpaRepository -->
+	<jpa:repositories base-package="Repository,Service"></jpa:repositories>
+
+
+</beans>

@@ -4,113 +4,56 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import Model.Aeroport;
 import Model.Ville;
-import Util.Context;
 
+@Repository
+@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, readOnly=false)
 public class DaoVilleJpa implements DaoVille{
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	public List<Ville> findAll() {
-		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Query query = em.createQuery("from Ville v");
-		List<Ville> ville = null;
-		ville = query.getResultList();
-		em.close();
+		List<Ville> ville = query.getResultList();
 		return ville;
 	}
 
 	public Ville findByKey(Long key) {
-		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
 		Ville r = null;
 		r = em.find(Ville.class, key);
-		em.close();
 		return r;
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, readOnly=false)
 	public void insert(Ville obj) {
-		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
-		EntityTransaction tx = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
 			em.persist(obj);
-			tx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-		} finally {
-			if (em != null && em.isOpen()) {
-				em.close();
-			}
-		}
-		
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, readOnly=false)
 	public Ville update(Ville obj) {
-		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
-		EntityTransaction tx = null;
 		Ville ville = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
 			ville = em.merge(obj);
-			tx.commit();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			tx.rollback(); //annuler une transaction
-			}
-		em.close();
 		return ville;
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, readOnly=false)
 	public void delete(Ville obj) {
-		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
-		EntityTransaction tx = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
-			obj = em.merge(obj);
-			for (Aeroport a : obj.getAeroport()) {
-				em.remove(a);
-			}
-			em.remove(obj);
-			tx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-		} finally {
-			if (em != null && em.isOpen()) {
-				em.close();
-			}
-		}
-		
+			em.remove(em.merge(obj));
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, readOnly=false)
 	public void deleteByKey(Long key) {
-		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
-		EntityTransaction tx = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
 			em.remove(em.find(Ville.class, key));
-			tx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-		} finally {
-			if (em != null && em.isOpen()) {
-				em.close();
-			}
-		}
 	}
 
 	

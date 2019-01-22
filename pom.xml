@@ -24,6 +24,61 @@
    			 <version>5.4.0.Final</version>
 		</dependency>
 		
-	</dependencies>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+   			 <groupId>org.springframework</groupId>
+   			 <artifactId>spring-context</artifactId>
+   			 <version>5.1.3.RELEASE</version>
+		</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+	<dependency>
+   		 <groupId>org.springframework</groupId>
+   		 <artifactId>spring-orm</artifactId>
+   		 <version>5.1.3.RELEASE</version>
+	</dependency>
 	
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+			<!-- Apache fournit un gestion de pool (=ensemble) de connexion à un site/bdd -->
+	<dependency>
+  		  <groupId>org.apache.commons</groupId>
+  		  <artifactId>commons-dbcp2</artifactId>
+   		  <version>2.5.0</version>
+	</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+	<dependency>
+   		 <groupId>org.springframework.data</groupId>
+  		  <artifactId>spring-data-jpa</artifactId>
+  		  <version>2.1.3.RELEASE</version>
+	</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<dependency>
+   		 <groupId>junit</groupId>
+  		 <artifactId>junit</artifactId>
+   		 <version>4.12</version>
+ 		 <scope>test</scope> <!-- sert à dire à Maven que cette dependance ne sert que pour la phase de test -> non utilisé lors du deploiement! -->
+	</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+	<dependency>
+   		 <groupId>org.springframework</groupId>
+   		 <artifactId>spring-test</artifactId>
+   		 <version>5.1.3.RELEASE</version>
+   		 <scope>test</scope>
+	</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/pl.pragmatists/JUnitParams -->
+	<dependency>
+   		 <groupId>pl.pragmatists</groupId>
+    	 <artifactId>JUnitParams</artifactId>
+   		 <version>1.1.1</version>
+   		 <scope>test</scope>
+	</dependency>
+
+	
+		
+		
+	</dependencies>
 </project>
