@@ -16,6 +16,7 @@ public class VolService {
 	private EscaleRepository escaleRepository;
 	
 	public void deleteEscale(Vol vol) {
+	
 		for (Escale e: vol.getEscale()) {
 			e.setKey(null);
 			e.setHeureDepart(null);
