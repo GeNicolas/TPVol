@@ -24,7 +24,7 @@ import javax.persistence.Version;
 @Table(name="Client")
 @SequenceGenerator(name="seqClient", sequenceName="seq_client", allocationSize=1, initialValue=100)
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",length=100)
+@DiscriminatorColumn(name="type",length=5)
 
 public abstract class Client {
 		@Id
@@ -46,7 +46,6 @@ public abstract class Client {
 			@AttributeOverride(name = "ville", column = @Column(name = "city", length = 150)) })
 		private Adresse adresse;
 		@OneToMany(mappedBy="client")
-
 		private Set <Reservation> reservation;
 		
 		
@@ -56,12 +55,21 @@ public abstract class Client {
 		@Version
 		private int version;
 		
-		 public Client () {
-			 
-		 }
+		public Client() {
+			super();
+		}
 
 
 		public Client( String nom, Integer numerotel, Integer numerofax, String email) {
+			super();
+			this.nom = nom;
+			this.numerotel = numerotel;
+			this.numerofax = numerofax;
+			this.email = email;
+		}
+
+
+		public Client(String nom, Integer numerotel, Integer numerofax, String email) {
 			super();
 			this.nom = nom;
 			this.numerotel = numerotel;
