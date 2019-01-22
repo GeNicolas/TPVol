@@ -57,12 +57,22 @@ public class Aeroport {
 		super();
 	}
 
-	public Aeroport(String nom, Set<Ville> ville) {
+	public Aeroport(String nom, Set<Ville> ville, Set<Escale> escale) {
 		super();
 		this.nom = nom;
 		this.villes = ville;
+		this.escale = escale;
 	}
 	
+	public Aeroport(String nom, Set<Vol> vol_arrivee, Set<Vol> vol_depart, Set<Ville> villes, Set<Escale> escale) {
+		super();
+		this.nom = nom;
+		this.vol_arrivee = vol_arrivee;
+		this.vol_depart = vol_depart;
+		this.villes = villes;
+		this.escale = escale;
+	}
+
 	// *** Methodes ***
 
 	public String getNom() {

@@ -20,7 +20,7 @@
 		<!-- ******* Activation des annotations liées à Spring ******** -->
 	<context:annotation-config></context:annotation-config>
 		<!-- base-package = ts les packages auxquels pourrons être utilisé des annotations (si +ieurs, separation par des virgules) -->
-	<context:component-scan base-package="Dao,Model, Service"></context:component-scan>
+	<context:component-scan base-package="Model, Service"></context:component-scan>
 		
 	
 		

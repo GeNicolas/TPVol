@@ -29,9 +29,14 @@ import javax.persistence.Version;
 @SequenceGenerator(name="seqVol", sequenceName="seq_vol", allocationSize=1, initialValue=1000) 
 
 @NamedQueries({
-	@NamedQuery(name = "Vol.findAllWithReservation", query = "select distinct v from Vol v left join fetch v.reservation"),
-	@NamedQuery(name = "Vol.findAllWithAeroport", query = "select distinct v from Vol v left join fetch v.aeroport_depart"),
-	@NamedQuery(name = "Vol.findAllWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne") })
+	@NamedQuery(name = "Vol.findByIdWithReservation", query = "select distinct v from Vol v left join fetch v.reservation where v.id :id"),
+	@NamedQuery(name = "Vol.findByIdWithAeroportDepart", query = "select distinct v from Vol v left join fetch v.aeroport_depart where v.id :id"),
+	@NamedQuery(name = "Vol.findByIdWithAeroportArrivee", query = "select distinct v from Vol v left join fetch v.aeroport_arrive where v.id :id"),
+	@NamedQuery(name = "Vol.findByIdWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne where v.id :id"),
+	@NamedQuery (name = "Vol.findAllWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne"),
+	@NamedQuery (name = "Vol.findAllWithAeroportDepart", query = "select distinct v from Vol v left join fetch v.aeroport_depart"),
+	@NamedQuery (name = "Vol.findAllWithAeroportArrivee", query = "select distinct v from Vol v left join fetch v.aeroport_arrive"),
+	@NamedQuery (name = "Vol.findAllWithAeroportReservation", query = "select distinct v from Vol v left join fetch v.reservation"),})
 
 public class Vol {
 
