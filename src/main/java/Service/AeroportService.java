@@ -19,15 +19,15 @@ public class AeroportService {
 	private VolRepository volRepository;
 	
 	public void deleteAeroportArriveWithVolArrive(Vol volArrive) {
-		Aeroport a = volArrive.getAeroport_arrive();
-		volArrive.setAeroport_arrive(null);
+		Aeroport a = volArrive.getAeroportArrivee();
+		volArrive.setAeroportArrivee(null);
 		volRepository.save(volArrive);
 		aeroportRepository.delete(a);	
 	}
 	
 	public void deleteAeroportDepartWithVolDepart(Vol volDepart) {
-		Aeroport a = volDepart.getAeroport_depart();
-		volDepart.setAeroport_depart(null);
+		Aeroport a = volDepart.getAeroportDepart();
+		volDepart.setAeroportDepart(null);
 		volRepository.save(volDepart);
 		aeroportRepository.delete(a);	
 	}

@@ -36,10 +36,10 @@ public class Aeroport {
 	@Column(name="nom")
 	private String nom;
 	
-	@OneToMany (mappedBy="aeroport_arrive")
+	@OneToMany (mappedBy="aeroportArrivee")
 	private Set<Vol> vol_arrivee;
 	
-	@OneToMany (mappedBy="aeroport_depart")
+	@OneToMany (mappedBy="aeroportDepart")
 	private Set<Vol> vol_depart;
 	
 	@ManyToMany(mappedBy ="aeroports")

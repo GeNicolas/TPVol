@@ -22,6 +22,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 @Entity 
@@ -30,12 +32,12 @@ import javax.persistence.Version;
 
 @NamedQueries({
 	@NamedQuery(name = "Vol.findByIdWithReservation", query = "select distinct v from Vol v left join fetch v.reservation where v.id =:id"),
-	@NamedQuery(name = "Vol.findByIdWithAeroportDepart", query = "select distinct v from Vol v left join fetch v.aeroport_depart where v.id =:id"),
-	@NamedQuery(name = "Vol.findByIdWithAeroportArrivee", query = "select distinct v from Vol v left join fetch v.aeroport_arrive where v.id= :id"),
+	@NamedQuery(name = "Vol.findByIdWithAeroportDepart", query = "select distinct v from Vol v left join fetch v.aeroportDepart where v.id =:id"),
+	@NamedQuery(name = "Vol.findByIdWithAeroportArrivee", query = "select distinct v from Vol v left join fetch v.aeroportArrivee where v.id= :id"),
 	@NamedQuery(name = "Vol.findByIdWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne where v.id =:id"),
 	@NamedQuery (name = "Vol.findAllWithCompagnie", query = "select distinct v from Vol v left join fetch v.compagnieAerienne"),
-	@NamedQuery (name = "Vol.findAllWithAeroportDepart", query = "select distinct v from Vol v left join fetch v.aeroport_depart"),
-	@NamedQuery (name = "Vol.findAllWithAeroportArrivee", query = "select distinct v from Vol v left join fetch v.aeroport_arrive"),
+	@NamedQuery (name = "Vol.findAllWithAeroportDepart", query = "select distinct v from Vol v left join fetch v.aeroportDepart"),
+	@NamedQuery (name = "Vol.findAllWithAeroportArrivee", query = "select distinct v from Vol v left join fetch v.aeroportArrivee"),
 	@NamedQuery (name = "Vol.findAllWithReservation", query = "select distinct v from Vol v left join fetch v.reservation")})
 
 public class Vol {
@@ -44,11 +46,13 @@ public class Vol {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqVol")
 	private Long id;
 	
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name="date_depart")
 	private Date dateDepart;
 	
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name="date_arrive")
 	private Date dateArrivee;
 	
@@ -65,11 +69,11 @@ public class Vol {
 	
 	@ManyToOne
 	@JoinColumn(name="aeroport_arrive_id")
-	private Aeroport aeroport_arrive;
+	private Aeroport aeroportArrivee;
 	
 	@ManyToOne
 	@JoinColumn(name="aeroport_depart_id")
-	private Aeroport aeroport_depart;
+	private Aeroport aeroportDepart;
 	
 	@OneToMany(mappedBy="key.vol")
 	private Set<CompagnieAerienneVol> compagnieAerienne;
@@ -104,8 +108,8 @@ public class Vol {
 		this.heureDepart = heureDepart;
 		this.heureArrivee = heureArrivee;
 		this.reservation = reservation;
-		this.aeroport_arrive = aeroport_arrive;
-		this.aeroport_depart = aeroport_depart;
+		this.aeroportArrivee = aeroport_arrive;
+		this.aeroportDepart = aeroport_depart;
 	}
 
 	
@@ -169,20 +173,21 @@ public class Vol {
 		this.version = version;
 	}
 
-	public Aeroport getAeroport_arrive() {
-		return aeroport_arrive;
+	
+	public Aeroport getAeroportArrivee() {
+		return aeroportArrivee;
 	}
 
-	public void setAeroport_arrive(Aeroport aeroport_arrive) {
-		this.aeroport_arrive = aeroport_arrive;
+	public void setAeroportArrivee(Aeroport aeroportArrivee) {
+		this.aeroportArrivee = aeroportArrivee;
 	}
 
-	public Aeroport getAeroport_depart() {
-		return aeroport_depart;
+	public Aeroport getAeroportDepart() {
+		return aeroportDepart;
 	}
 
-	public void setAeroport_depart(Aeroport aeroport_depart) {
-		this.aeroport_depart = aeroport_depart;
+	public void setAeroportDepart(Aeroport aeroportDepart) {
+		this.aeroportDepart = aeroportDepart;
 	}
 
 	public Set<CompagnieAerienneVol> getCompagnieAerienne() {
